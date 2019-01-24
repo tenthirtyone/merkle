@@ -135,7 +135,6 @@ describe('Hashb', () => {
       try {
         await hashb.hashb(null);
       } catch(e) {
-        console.log(e.message);
         expect(e.message).to.be.equal('data can be an string, string[], number, boolean, buffer, stream or file path not object');
       }
     });

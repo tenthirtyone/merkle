@@ -99,15 +99,15 @@ describe('LinkedList', () => {
       await ll.add(1);
     });
     it('Returns the head value and deletes the element', () => {
-      const data = ll.shift();
-      expect(data).to.be.equal(0);
+      const node = ll.shift();
+      expect(node.data).to.be.equal(0);
       expect(ll.length).to.be.equal(1);
     });
     it('Returns null if length === 0', () => {
       ll.shift();
       ll.shift();
-      const data = ll.shift();
-      expect(data).to.be.equal(null);
+      const node = ll.shift();
+      expect(node).to.be.equal(null);
     });
   });
 

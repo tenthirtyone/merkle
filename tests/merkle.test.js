@@ -10,5 +10,42 @@ describe('Merkle', () => {
     merkle = new Merkle();
   });
 
+  describe('add', () => {
+    it('adds a value', () => {
+      merkle.add(1);
+    });
+  });
+  describe('remove', () => {
+    it('removes from an index', () => {
+      merkle.add(1);
+      merkle.remove(0);
+      expect(merkle.size()).to.be.equal(0);
+    });
+  });
+  describe('calculate root', () => {
+    it('calculates the root', async () => {
+      await merkle.add(1);
+      await merkle.add(1);
+      await merkle.add(1);
+      await merkle.add(1);
 
+      const root = await merkle.calculateRoot();
+      expect(root.toString('hex').length).to.be.equal(64);
+    });
+  });
+  describe('removeData', () => {
+    it('scans and removes the first instance of the data', async () => {
+      await merkle.add(0);
+      await merkle.add(1);
+      await merkle.add(2);
+      await merkle.add(3);
+
+      const three = merkle.removeData(3);
+      expect(three).to.include.ordered.members([3]);
+    });
+    it('returns null if data is not found', async () => {
+      const n = await merkle.removeData(true);
+      expect(n).to.include.ordered.members([]);
+    });
+  });
 });
