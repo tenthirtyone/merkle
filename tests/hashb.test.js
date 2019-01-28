@@ -102,7 +102,21 @@ describe('Hashb', () => {
       expect(hash.toString('hex').length).to.be.equal(64);
     });
   });
-  describe('hash', () => {
+  describe('hashb', () => {
+    it('handles nothing', async () => {
+      try {
+        const hash = await hashb.hashb();
+      } catch (e) {
+        expect(e.message).to.be.equal('data can be an string, string[], number, boolean, buffer, stream or file path not undefined');
+      }
+    });
+    it('handles null', async () => {
+      try {
+        const hash = await hashb.hashb(null);
+      } catch (e) {
+        expect(e.message).to.be.equal('data can be an string, string[], number, boolean, buffer, stream or file path not object');
+      }
+    });
     it('hashes a string', async () => {
       const hash = await hashb.hashb(hashStr);
       expect(hash.toString('hex')).to.be.equal(answer);
